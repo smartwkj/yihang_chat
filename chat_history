@@ -1,0 +1,24 @@
+async function sendMessage(uid,content){
+    await fetch("https://www.luogu.com.cn/api/chat/new", {
+        headers: [
+            ["content-type", "application/json"],
+            ["referer", "https://www.luogu.com.cn/"],
+            ["x-csrf-token", document.querySelector("meta[name=csrf-token]").content],
+        ],
+        body: JSON.stringify({
+            user: uid,
+            content: content,
+        }),
+        method: "POST",
+    });
+}
+
+(function() {
+	let uid=917289;
+	//uid为你要轰炸的人 
+	let n=10;
+	//n为轰炸次数
+	let word="Hello,AtCo" ;
+	//word为轰炸内容 
+    for(num=0;num<n;++num)sendMessage(uid,word);
+})();
